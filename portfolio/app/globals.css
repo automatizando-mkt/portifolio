@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-canvas-bg: #050505;
+  --color-canvas-surface: #0A0A0A;
+  --color-canvas-accent: #F97316;
+
+  --color-background: #050505;
+  --color-foreground: #d4d4d4;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  --animate-fade-slide-in: fadeSlideIn 0.8s ease-out both;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes beam-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes beam-slide {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+body {
+  background: var(--color-canvas-bg);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: #F97316;
+  color: #000000;
+}
