@@ -1,17 +1,29 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Canvas DS — Primary Colors */
   --color-canvas-bg: #050505;
   --color-canvas-surface: #0A0A0A;
   --color-canvas-accent: #F97316;
 
+  /* Brand — Automatizando Soluções */
+  --color-brand-orange: #FF6B1A;
+  --color-brand-navy: #1C3A52;
+
+  /* Semantic */
   --color-background: #050505;
   --color-foreground: #d4d4d4;
 
+  /* Typography */
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
+  /* Animations */
   --animate-fade-slide-in: fadeSlideIn 0.8s ease-out both;
+  --animate-beam-drop: beam-drop 5s ease-in-out infinite;
+  --animate-beam-slide: beam-slide 7s ease-in-out infinite;
 }
+
+/* === Keyframes === */
 
 @keyframes fadeSlideIn {
   0% {
@@ -54,6 +66,8 @@
   }
 }
 
+/* === Base Styles === */
+
 body {
   background: var(--color-canvas-bg);
   color: var(--color-foreground);
@@ -63,4 +77,82 @@ body {
 ::selection {
   background-color: #F97316;
   color: #000000;
+}
+
+/* === Grid Background Pattern === */
+
+.grid-background {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+/* === Glass Morphism === */
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* === Beam Border Effect (Badges) === */
+
+.beam-badge {
+  position: relative;
+  overflow: hidden;
+  padding: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.beam-badge-beam {
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg, transparent 60%, #F97316 80%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: beam-spin 2s linear infinite;
+}
+
+.beam-badge:hover .beam-badge-beam {
+  opacity: 1;
+}
+
+.beam-badge:hover {
+  background: transparent;
+}
+
+.beam-badge-content {
+  position: relative;
+  z-index: 1;
+  background: var(--color-canvas-bg);
+}
+
+@keyframes beam-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* === Custom Scrollbar (Dark Theme) === */
+
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+  }
 }
