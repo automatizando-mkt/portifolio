@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /exclusao-de-dados/
+
+Sitemap: https://automatizando.site/sitemap.xml

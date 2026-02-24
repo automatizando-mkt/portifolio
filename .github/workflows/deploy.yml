@@ -1,0 +1,46 @@
+name: Deploy → automatizando.site
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'portfolio/**'
+
+jobs:
+  build-and-deploy:
+    name: Build e Deploy (FTP)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio/package-lock.json
+
+      - name: Instalar dependências
+        working-directory: portfolio
+        run: npm ci
+
+      - name: Build estático
+        working-directory: portfolio
+        run: npm run build
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: portfolio/out/
+          server-dir: /
+          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
