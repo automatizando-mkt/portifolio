@@ -13,6 +13,7 @@ export default function HomePage() {
           subtitle="Transformo operações manuais em fluxos inteligentes com IA — gerando economia, velocidade e escala para o seu negócio."
           ctaText="Ver Cases"
           ctaHref="/cases"
+          showHeroImage
         />
       </FadeSlideIn>
 

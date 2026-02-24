@@ -1,10 +1,10 @@
 import { Mail, Phone, Linkedin, Instagram, MapPin } from 'lucide-react';
 
 const CONTACT_ITEMS = [
-  { icon: Mail, label: 'contato@automatizando.com', href: 'mailto:contato@automatizando.com' },
-  { icon: Phone, label: '+55 (XX) XXXXX-XXXX', href: '#' },
-  { icon: Linkedin, label: '/in/gabriel-automatizando', href: 'https://linkedin.com/in/gabriel-automatizando', external: true },
-  { icon: Instagram, label: '@automatizandosolucoes', href: 'https://instagram.com/automatizandosolucoes', external: true },
+  { icon: Mail, label: 'contato@automatizando.site', href: 'mailto:contato@automatizando.site' },
+  { icon: Phone, label: '(92) 98186-6864', href: 'https://wa.me/5592981866864', external: true },
+  { icon: Linkedin, label: '/in/gabriel-automatizando-solucoes', href: 'https://www.linkedin.com/in/gabriel-automatizando-solucoes', external: true },
+  { icon: Instagram, label: '@automatizando.solucoes', href: 'https://www.instagram.com/automatizando.solucoes', external: true },
   { icon: MapPin, label: 'Brasil — Remoto' },
 ];
 

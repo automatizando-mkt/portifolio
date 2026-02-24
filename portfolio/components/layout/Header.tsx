@@ -14,17 +14,15 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center">
           <Image
-            src="/logo-icon.png"
+            src="/logo-main.png"
             alt="Automatizando Soluções"
-            width={28}
-            height={28}
-            className="rounded-full"
+            width={160}
+            height={40}
+            className="h-8 w-auto"
+            priority
           />
-          <span className="text-xs font-mono uppercase tracking-widest text-white">
-            Automatizando
-          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">

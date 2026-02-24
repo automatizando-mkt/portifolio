@@ -10,9 +10,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfólio | Gestor de Automação com IA',
+  title: 'Automatizando Soluções | Automação Inteligente com IA',
   description:
-    'Portfólio profissional de automação com inteligência artificial — cases, serviços e contato.',
+    'Transformo operações manuais em fluxos inteligentes com IA — gerando economia, velocidade e escala para o seu negócio.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+  },
 };
 
 export default function RootLayout({
