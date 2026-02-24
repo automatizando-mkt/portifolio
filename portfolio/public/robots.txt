@@ -5,4 +5,4 @@ Disallow: /exclusao-de-dados/
 Sitemap: https://automatizando.site/sitemap.xml
 
 # automatizando.site
-# deploy: ftps fix
+# deploy: ftp via ip fix
