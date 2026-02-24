@@ -1,0 +1,165 @@
+name: case-study-pipeline
+version: 1.0.0
+description: Pipeline completo de 8 agentes para produção de Case Study LP — do briefing ao pacote A/B
+squad: case-study-lp
+
+# Modo de execução padrão
+default_mode: guided
+
+# Artefatos do pipeline
+artifacts:
+  brief_json: "brief.json"
+  brief_summary: "brief-summary.md"
+  creative_brief: "creative-brief.md"
+  wireframe: "wireframe.md"
+  draft_v1: "case-draft-v1.md"
+  draft_v2: "case-draft-v2.md"
+  draft_v3: "case-draft-v3.md"
+  case_final: "case-final.md"
+  qa_report: "qa-report.md"
+  proof_checklist: "proof-checklist.md"
+  variants: "variants-package.md"
+
+# Regra global
+rules:
+  - id: brief-first
+    description: Nenhum agente escreve conteúdo antes do Brief ser aprovado
+    gate: step_discovery
+    enforcement: BLOCK
+
+  - id: no-invention
+    description: Zero números ou resultados inventados — apenas dados do brief
+    enforcement: WARN
+
+  - id: cta-minimum
+    description: CTA deve aparecer mínimo 3x na versão final
+    enforcement: WARN
+
+steps:
+  - id: step_discovery
+    name: "Fase 1 — Discovery: Briefing"
+    agent: discovery
+    task: discovery-briefing.md
+    inputs: []
+    outputs:
+      - brief.json
+      - brief-summary.md
+    gate:
+      condition: "meta.aprovado == true"
+      block_message: "Brief não aprovado. Confirme o brief antes de prosseguir."
+    next: step_strategy
+    aios_integration:
+      note: "@pm pode ser envolvido aqui para criar epic/stories de implementação"
+
+  - id: step_strategy
+    name: "Fase 2 — Strategy: Posicionamento"
+    agent: strategist
+    task: strategy-positioning.md
+    inputs:
+      - brief.json
+    outputs:
+      - creative-brief.md
+    requires: [step_discovery]
+    next: step_wireframe
+
+  - id: step_wireframe
+    name: "Fase 3 — Page Architect: Wireframe"
+    agent: page-architect
+    task: page-wireframe.md
+    inputs:
+      - brief.json
+      - creative-brief.md
+    outputs:
+      - wireframe.md
+    requires: [step_strategy]
+    next: step_writing
+    aios_integration:
+      note: "@ux-design-expert pode receber o wireframe.md para criar design visual"
+
+  - id: step_writing
+    name: "Fase 4 — Case Writer: Escrita v1"
+    agent: case-writer
+    task: case-writing.md
+    inputs:
+      - brief.json
+      - creative-brief.md
+      - wireframe.md
+    outputs:
+      - case-draft-v1.md
+    requires: [step_wireframe]
+    next: step_proof
+
+  - id: step_proof
+    name: "Fase 5 — Proof Builder: Injeção de Provas"
+    agent: proof-builder
+    task: proof-building.md
+    inputs:
+      - brief.json
+      - case-draft-v1.md
+    outputs:
+      - case-draft-v2.md
+      - proof-checklist.md
+    requires: [step_writing]
+    next: step_seo
+
+  - id: step_seo
+    name: "Fase 6 — SEO/FAQ: FAQ e Metadados"
+    agent: seo-faq
+    task: seo-faq-creation.md
+    inputs:
+      - brief.json
+      - case-draft-v2.md
+    outputs:
+      - case-draft-v3.md
+    requires: [step_proof]
+    next: step_editing
+
+  - id: step_editing
+    name: "Fase 7 — Editor: Revisão e QA"
+    agent: editor
+    task: case-editing.md
+    inputs:
+      - case-draft-v3.md
+    outputs:
+      - case-final.md
+      - qa-report.md
+    requires: [step_seo]
+    gate:
+      condition: "qa_score >= 7"
+      block_message: "Score QA abaixo de 7. Melhorias obrigatórias antes de aprovar."
+    next: step_variants
+    aios_integration:
+      note: "@qa pode fazer revisão adicional em case-final.md antes do step_variants"
+
+  - id: step_variants
+    name: "Fase 8 — Variants: Pacote A/B"
+    agent: variants
+    task: variants-ab.md
+    inputs:
+      - case-final.md
+    outputs:
+      - variants-package.md
+    requires: [step_editing]
+    next: pipeline_complete
+
+pipeline_complete:
+  deliverables:
+    - brief.json + brief-summary.md
+    - creative-brief.md
+    - wireframe.md
+    - case-final.md (página em Markdown)
+    - qa-report.md
+    - proof-checklist.md
+    - variants-package.md
+  next_steps:
+    - "@ux-design-expert: design visual baseado no wireframe.md"
+    - "@dev: implementar case-final.md como página Next.js/Webflow"
+    - "@devops: deploy da página em produção"
+    - "Executar testes A/B com variants-package.md"
+
+# Modo rápido (--quick flag)
+quick_mode:
+  description: "Versão enxuta com placeholders — quando usuário quer draft rápido"
+  skip_steps: [step_proof, step_seo]
+  placeholder_mode: true
+  output_note: "Versão rápida gerada. Pendências marcadas para completar depois."

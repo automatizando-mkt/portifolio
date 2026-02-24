@@ -1,0 +1,286 @@
+# Schema do Brief Estruturado — Case Study LP Squad
+# Todos os campos marcados como required: true são obrigatórios antes de avançar no pipeline
+# Se não disponível, usar "nao_informado" e documentar em proxies
+
+schema_version: "1.0"
+squad: case-study-lp
+
+fields:
+
+  # ─── CLIENTE ──────────────────────────────────────────────────────────────
+  cliente:
+    nome:
+      type: string
+      required: true
+      description: "Nome da empresa ou segmento (se confidencial: 'empresa de saúde — SP')"
+      example: "Clínica Saúde Total"
+
+    segmento:
+      type: string
+      required: true
+      description: "Setor/mercado de atuação"
+      example: "Saúde | Varejo | SaaS | Imobiliário | Educação | Serviços B2B"
+
+    localizacao:
+      type: string
+      required: false
+      description: "Cidade ou estado/país"
+      example: "São Paulo, SP"
+
+    tamanho:
+      type: enum
+      required: false
+      values: [MEI, Pequeno, Médio, Grande, Enterprise]
+      description: "Porte da empresa"
+
+    modelo_receita:
+      type: string
+      required: true
+      description: "Como a empresa ganha dinheiro"
+      example: "mensalidade SaaS | consultas presenciais | comissão de vendas | projeto pontual"
+
+  # ─── DECISOR ──────────────────────────────────────────────────────────────
+  decisor:
+    cargo:
+      type: string
+      required: true
+      description: "Cargo de quem decide contratar o serviço"
+      example: "CEO | Gerente de Vendas | CMO | Dono"
+
+    objecoes_principais:
+      type: list
+      required: true
+      min_items: 2
+      description: "Principais objeções desse perfil antes de contratar"
+      example:
+        - "Muito caro para o porte da empresa"
+        - "Já tentamos chatbot e não funcionou"
+        - "Não temos equipe técnica para manter"
+
+  # ─── DOR ──────────────────────────────────────────────────────────────────
+  dor:
+    sintoma:
+      type: string
+      required: true
+      description: "O que acontecia visivelmente — o efeito percebido"
+      example: "Leads entravam fora do horário e ficavam sem resposta por horas"
+
+    causa_raiz:
+      type: string
+      required: true
+      description: "Por que o sintoma acontecia — a causa real"
+      example: "Processo de atendimento dependia 100% de equipe humana sem automação"
+
+    tentativas_anteriores:
+      type: list
+      required: false
+      description: "O que o cliente já tentou antes que não funcionou"
+      example:
+        - "Usaram planilha de controle — abandonaram após 2 meses"
+        - "Contrataram um atendente extra — custo alto, mesma limitação de horário"
+
+  # ─── BASELINE ─────────────────────────────────────────────────────────────
+  baseline:
+    description: "Situação ANTES do projeto — métricas ou descritivo"
+    tempo_resposta:
+      type: string
+      required: false
+      example: "4–8 horas para primeiro contato | 2 dias úteis"
+
+    taxa_conversao:
+      type: string
+      required: false
+      example: "12% de leads respondidos viravam agendamentos"
+
+    volume_leads:
+      type: string
+      required: false
+      example: "50 leads/mês | desconhecido"
+
+    cac:
+      type: string
+      required: false
+      example: "R$ 350 por cliente | não medido"
+
+    outros:
+      type: object
+      required: false
+      description: "Outros indicadores relevantes para este projeto específico"
+      example:
+        taxa_abandono: "40% dos leads sumiam após primeiro contato"
+        retrabalho_horas: "8h/semana de retrabalho manual"
+
+  # ─── PROJETO ──────────────────────────────────────────────────────────────
+  projeto:
+    nome:
+      type: string
+      required: false
+      description: "Nome interno ou título do projeto"
+
+    fases:
+      type: list
+      required: true
+      min_items: 1
+      description: "Fases do projeto executadas"
+      example:
+        - "Fase 1 — Mapeamento de processos (2 semanas)"
+        - "Fase 2 — Construção do fluxo de automação (3 semanas)"
+        - "Fase 3 — Testes e ajustes (1 semana)"
+
+    entregaveis:
+      type: list
+      required: true
+      min_items: 1
+      description: "O que foi entregue — como cardápio comprável"
+      example:
+        - "Fluxo de atendimento automatizado no WhatsApp"
+        - "Integração com CRM (HubSpot)"
+        - "Dashboard de métricas em tempo real"
+        - "Documentação e treinamento da equipe"
+
+    ferramentas:
+      type: list
+      required: false
+      description: "Ferramentas utilizadas (meio, não protagonista)"
+      example: ["n8n", "WhatsApp Business API Oficial", "HubSpot", "Google Sheets"]
+
+    mudanca_processo:
+      type: string
+      required: true
+      description: "O que passou a acontecer automaticamente"
+      example: "Leads passaram a receber resposta em até 30 segundos, 24/7, com qualificação automática antes de falar com humano"
+
+    duracao:
+      type: string
+      required: false
+      example: "6 semanas | 3 meses"
+
+  # ─── RESULTADOS ───────────────────────────────────────────────────────────
+  resultados:
+    metricas:
+      type: list
+      required: false
+      description: "Métricas apuradas (com fonte se possível)"
+      example:
+        - metrica: "Tempo de primeiro contato"
+          antes: "4–8 horas"
+          depois: "< 30 segundos"
+          fonte: "Dashboard WhatsApp"
+        - metrica: "Taxa de agendamento"
+          antes: "12%"
+          depois: "28%"
+          fonte: "CRM HubSpot"
+
+    proxies:
+      type: list
+      required: false
+      description: "Indicadores alternativos quando métricas diretas não estão disponíveis"
+      example:
+        - "Equipe parou de receber reclamações de 'não fui respondido'"
+        - "Volume de leads fora de horário respondidos passou de 0 para 100%"
+
+    tempo_para_resultado:
+      type: string
+      required: false
+      example: "Primeiros resultados em 2 semanas. Resultados completos em 60 dias."
+
+  # ─── PROVAS ───────────────────────────────────────────────────────────────
+  provas:
+    tipo:
+      type: list
+      required: true
+      values: [prints, depoimento, log, dashboard, numero, relatorio, feedback_email, feedback_mensagem]
+
+    disponivel:
+      type: list
+      required: false
+      description: "Provas que JÁ existem e podem ser usadas"
+
+    pendente:
+      type: list
+      required: false
+      description: "Provas que precisam ser coletadas"
+
+  # ─── OFERTA ───────────────────────────────────────────────────────────────
+  oferta:
+    servico:
+      type: string
+      required: true
+      description: "O que você quer vender após este case"
+      example: "Automação de atendimento WhatsApp | Funil de vendas automatizado"
+
+    pacote:
+      type: string
+      required: false
+      description: "Nome/formato do pacote"
+      example: "Pacote Atendimento Inteligente | Projeto completo sob medida"
+
+    valor_range:
+      type: string
+      required: false
+      description: "Faixa de valor — não aparece na página, apenas para contexto"
+
+  # ─── CTA ──────────────────────────────────────────────────────────────────
+  cta:
+    acao:
+      type: string
+      required: true
+      description: "O que o lead deve fazer"
+      example: "agendar call | preencher formulário | enviar DM | WhatsApp"
+
+    link_ou_contact:
+      type: string
+      required: false
+      example: "https://cal.com/gabriel | wa.me/5592981866864"
+
+  # ─── RESTRIÇÕES ───────────────────────────────────────────────────────────
+  restricoes:
+    tom:
+      type: enum
+      required: false
+      values: [formal, semi-formal, descontraido, tecnico]
+      default: semi-formal
+
+    termos_proibidos:
+      type: list
+      required: false
+      description: "Palavras ou frases que NÃO podem aparecer"
+      example: ["nome do concorrente X", "garantimos", "100% de sucesso"]
+
+    compliance:
+      type: string
+      required: false
+      example: "LGPD — não mencionar dados pessoais dos clientes finais"
+
+    confidencialidade:
+      type: enum
+      required: false
+      values: [publico, anonimizado, confidencial]
+      default: publico
+      description: "Nível de confidencialidade do cliente"
+
+  # ─── META ─────────────────────────────────────────────────────────────────
+  meta:
+    aprovado:
+      type: boolean
+      required: true
+      default: false
+      description: "Brief aprovado pelo usuário antes de avançar no pipeline"
+
+    versao:
+      type: string
+      default: "1.0"
+
+    data_criacao:
+      type: string
+      format: "YYYY-MM-DD"
+
+    criado_por:
+      type: string
+      default: "discovery"
+      description: "Agente que criou o brief"
+
+    pendencias:
+      type: list
+      required: false
+      description: "Dados faltantes documentados para completar depois"

@@ -1,0 +1,126 @@
+# Proxy Metrics — Case Study LP Squad
+# Métricas alternativas quando dados diretos não estão disponíveis
+# Uso: Discovery Agent seleciona proxies relevantes quando baseline está incompleto
+
+version: "1.0"
+squad: case-study-lp
+
+categories:
+
+  tempo:
+    description: "Proxies relacionados a velocidade e tempo de processo"
+    proxies:
+      - id: tempo_resposta
+        label: "Tempo de resposta ao lead"
+        antes: "X horas / dias para primeiro contato"
+        depois: "Resposta em menos de Y minutos"
+        quando_usar: "Automação de atendimento, chatbot, WhatsApp"
+
+      - id: tempo_qualificacao
+        label: "Tempo de qualificação de lead"
+        antes: "Call de 30–60 min para entender o perfil do lead"
+        depois: "Lead chega à call já qualificado (sabe preço, escopo e se encaixa no perfil)"
+        quando_usar: "Funil de vendas, automação de pré-venda"
+
+      - id: tempo_agendamento
+        label: "Tempo para agendar uma reunião"
+        antes: "Média de X trocas de mensagens para confirmar horário"
+        depois: "Lead agenda autonomamente via link — zero trocas de mensagem"
+        quando_usar: "Automação de agendamento, Calendly, integrações"
+
+      - id: tempo_relatorio
+        label: "Tempo para gerar relatório"
+        antes: "X horas/semana para compilar dados manualmente"
+        depois: "Dashboard atualizado em tempo real — zero trabalho manual"
+        quando_usar: "Automação de relatórios, BI, dashboards"
+
+  volume:
+    description: "Proxies relacionados a volume e capacidade"
+    proxies:
+      - id: volume_atendimento
+        label: "Volume de atendimentos simultâneos"
+        antes: "Limite de X atendimentos simultâneos (capacidade humana)"
+        depois: "Ilimitado — automação atende qualquer volume sem filas"
+        quando_usar: "Chatbot, WhatsApp automação"
+
+      - id: volume_leads_fora_horario
+        label: "Leads fora do horário comercial"
+        antes: "X% dos leads fora do horário ficavam sem resposta"
+        depois: "100% dos leads recebem resposta imediata, 24/7"
+        quando_usar: "Automação de atendimento 24/7"
+
+      - id: volume_qualificados
+        label: "Leads qualificados chegando ao vendedor"
+        antes: "Vendedor recebia leads frios e precisava qualificar no cold call"
+        depois: "Somente leads qualificados chegam à call (com contexto do problema)"
+        quando_usar: "Funil pré-venda, qualificação automatizada"
+
+  friccao:
+    description: "Proxies relacionados à redução de fricção e retrabalho"
+    proxies:
+      - id: friccao_manual
+        label: "Eliminação de etapas manuais"
+        antes: "X etapas manuais no processo (copiar/colar, planilha, e-mail manual)"
+        depois: "Processo automatizado end-to-end — equipe só intervém em exceções"
+        quando_usar: "Automação de processos internos"
+
+      - id: friccao_retrabalho
+        label: "Redução de retrabalho"
+        antes: "X horas/semana de retrabalho por erro humano ou processo manual"
+        depois: "Zero retrabalho — processo automatizado sem possibilidade de erro manual"
+        quando_usar: "Automação operacional, integração de sistemas"
+
+      - id: friccao_dependencia
+        label: "Dependência de pessoa específica"
+        antes: "Processo dependia de [nome/cargo] — parava quando indisponível"
+        depois: "Processo funciona independente de pessoa — disponível 24/7"
+        quando_usar: "Automação de gargalo humano"
+
+  confiabilidade:
+    description: "Proxies relacionados à consistência e previsibilidade"
+    proxies:
+      - id: confiabilidade_processo
+        label: "Consistência de processo"
+        antes: "Cada atendimento era diferente — dependia de quem estava de plantão"
+        depois: "Processo padronizado — mesma experiência para todos os leads"
+        quando_usar: "Automação de atendimento e vendas"
+
+      - id: confiabilidade_dados
+        label: "Confiabilidade dos dados"
+        antes: "Dados espalhados em planilhas, WhatsApp pessoal e memória da equipe"
+        depois: "Dados centralizados no CRM — histórico completo, rastreável"
+        quando_usar: "Integração CRM, automação de registro"
+
+      - id: confiabilidade_followup
+        label: "Follow-up consistente"
+        antes: "X% dos leads não recebiam follow-up (esquecia ou falta de tempo)"
+        depois: "100% dos leads recebem follow-up automático na cadência definida"
+        quando_usar: "Automação de follow-up, nurturing"
+
+  qualidade:
+    description: "Proxies relacionados à qualidade de lead e resultado"
+    proxies:
+      - id: qualidade_lead
+        label: "Qualidade do lead na call"
+        antes: "Vendedor descobria o perfil do lead durante a call"
+        depois: "Lead chega com contexto — problem-aware, sabe o preço, entende o escopo"
+        quando_usar: "Funil de pré-venda automatizado"
+
+      - id: qualidade_comunicacao
+        label: "Qualidade da comunicação com o cliente"
+        antes: "Resposta genérica para todos os leads"
+        depois: "Mensagens personalizadas por segmento, dor ou etapa do funil"
+        quando_usar: "Marketing conversacional, segmentação"
+
+      - id: qualidade_reativacao
+        label: "Reativação de leads frios"
+        antes: "Leads que não responderam eram descartados após 1–2 tentativas"
+        depois: "Cadência automática de reativação — leads reengajados sem esforço manual"
+        quando_usar: "Automação de follow-up, reengajamento"
+
+# Instrução de uso para o Discovery Agent:
+# Quando o usuário não tiver métricas diretas:
+# 1. Apresentar os proxies relevantes para o tipo de projeto
+# 2. Perguntar: "Destes, quais você consegue confirmar que aconteceram?"
+# 3. Documentar os confirmados como "proxies validados" no brief.json
+# 4. Marcar os não confirmados como "proxies a validar com cliente"

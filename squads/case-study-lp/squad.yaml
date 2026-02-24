@@ -1,0 +1,84 @@
+name: case-study-lp
+version: 1.0.0
+description: >
+  Squad completo de 8 agentes especializados para produzir Case Study Landing Pages de alta
+  conversão (LP disfarçada de case). Transforma projetos de automação, marketing conversacional,
+  funis e desenvolvimento em páginas que demonstram autoridade, processo e resultado —
+  preparando o lead para contratar. Padrão de agências high-end, em PT-BR.
+author: Automatizando Soluções
+license: MIT
+slashPrefix: case
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  tasks:
+    - discovery-briefing.md
+    - strategy-positioning.md
+    - page-wireframe.md
+    - case-writing.md
+    - proof-building.md
+    - seo-faq-creation.md
+    - case-editing.md
+    - variants-ab.md
+  agents:
+    - discovery.md
+    - strategist.md
+    - page-architect.md
+    - case-writer.md
+    - proof-builder.md
+    - seo-faq.md
+    - editor.md
+    - variants.md
+  workflows:
+    - case-study-pipeline.yaml
+  checklists:
+    - qa-checklist.md
+  templates:
+    - brief-schema.yaml
+    - page-template.md
+  tools: []
+  scripts: []
+  data:
+    - proxy-metrics.yaml
+
+config:
+  extends: extend
+  coding-standards: config/coding-standards.md
+  tech-stack: config/tech-stack.md
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+
+integrations:
+  aios_agents:
+    - id: pm
+      role: Gerenciamento de projeto e requisitos (contexto de squad)
+      handoff: "Brief aprovado → @pm pode criar epic/story para implementação da página"
+    - id: dev
+      role: Implementação da página em Next.js/HTML/CSS
+      handoff: "case-final.md → @dev implementa a página no projeto"
+    - id: qa
+      role: Revisão técnica adicional além do Editor interno
+      handoff: "case-final.md → @qa valida qualidade antes de publicar"
+    - id: ux-design-expert
+      role: Design visual da página (layout, tipografia, imagens)
+      handoff: "wireframe.md → @ux-design-expert cria o design visual"
+    - id: devops
+      role: Deploy e publicação da página em produção
+      handoff: "Página implementada → @devops faz o deploy"
+
+tags:
+  - copywriting
+  - case-study
+  - landing-page
+  - conversion
+  - seo
+  - persuasion
+  - pt-br
+  - automacao
+  - marketing-conversacional
