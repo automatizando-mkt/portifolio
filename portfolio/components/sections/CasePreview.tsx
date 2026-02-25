@@ -6,22 +6,11 @@ import { Button } from '@/components/ui/Button';
 
 const FEATURED_CASES = [
   {
-    title: 'Automação de Pipeline de Vendas',
-    description: 'Pipeline completo automatizado com IA para qualificação e follow-up de leads.',
-    metric: { value: '+45%', label: 'Conversão' },
-    tags: ['Vendas', 'CRM', 'IA'],
-  },
-  {
-    title: 'Chatbot de Suporte com IA',
-    description: 'Atendimento 24/7 com chatbot inteligente que resolve 80% das dúvidas.',
-    metric: { value: '-60%', label: 'Tempo resposta' },
-    tags: ['Suporte', 'Chatbot', 'NLP'],
-  },
-  {
-    title: 'Dashboard de Métricas Automatizado',
-    description: 'Relatórios automáticos consolidando dados de 5+ plataformas em tempo real.',
-    metric: { value: '100+', label: 'Relatórios/mês' },
-    tags: ['Analytics', 'Automação'],
+    slug: 'moods',
+    title: '95% do suporte da Moods virou automático',
+    description: 'Como uma infoprodutora com +20.000 figurinhas para Stories parou de responder a mesma pergunta todo dia com automação de atendimento no WhatsApp.',
+    metric: { value: '95%', label: 'Atendimento automatizado' },
+    tags: ['Infoprodutor', 'WhatsApp', 'IA'],
   },
 ] as const;
 
@@ -32,7 +21,7 @@ export function CasePreview() {
         <SectionHeading label="Cases" title="Cases em Destaque" />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {FEATURED_CASES.map((caseItem) => (
-            <Card key={caseItem.title}>
+            <Card key={caseItem.title} href={`/cases/${caseItem.slug}`}>
               <div className="mb-4 flex flex-wrap gap-2">
                 {caseItem.tags.map((tag) => (
                   <span
