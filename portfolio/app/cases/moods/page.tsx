@@ -319,7 +319,7 @@ export default function MoodsCasePage() {
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {PILARES.map((pilar) => (
-                <Card key={pilar.number}>
+                <Card key={pilar.number} className="border-white/20 hover:border-canvas-accent/50">
                   <p className="mb-4 text-5xl font-light text-canvas-accent/20">{pilar.number}</p>
                   <h3 className="text-xl font-medium text-white transition-colors duration-300 group-hover:text-canvas-accent">
                     {pilar.title}
@@ -431,19 +431,12 @@ export default function MoodsCasePage() {
               </table>
             </div>
 
-            {/* Prints */}
-            <div className="mb-12 grid grid-cols-2 gap-6 md:grid-cols-4">
-              <div className="overflow-hidden border border-white/10">
-                <img
-                  src="/cases/moods/print-beatriz.png"
-                  alt="Conversa com Beatriz, fundadora da Moods, confirmando 95% de melhoria"
-                  className="h-auto w-full"
-                />
-                <p className="border-t border-white/10 p-4 text-xs font-light text-neutral-500">
-                  Conversa com Beatriz confirmando 95% de melhoria após a implementação
-                </p>
-              </div>
-              <div className="overflow-hidden border border-white/10">
+            {/* Print de apoio */}
+            <div className="mb-12">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-neutral-500">
+                O sistema em ação
+              </p>
+              <div className="mx-auto w-full overflow-hidden border border-white/10 sm:w-1/2 md:w-1/3">
                 <img
                   src="/cases/moods/suporte-acesso.jpeg"
                   alt="bIA resolvendo dúvida de acesso ao produto"
@@ -472,21 +465,44 @@ export default function MoodsCasePage() {
       <FadeSlideIn>
         <section className="border-t border-white/5 py-24">
           <Container>
-            <div className="mx-auto max-w-3xl">
-              <p className="mb-8 text-xs font-semibold uppercase tracking-widest text-canvas-accent">
-                O que a Beatriz disse
-              </p>
-              <blockquote className="border-l-2 border-canvas-accent pl-8">
-                <p className="text-3xl font-light leading-relaxed text-white">
-                  &ldquo;Com a automação melhorou 95%.&rdquo;
+            <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-canvas-accent">
+              Prova Real
+            </p>
+            <h2 className="mb-12 text-3xl font-medium text-white">
+              A fundadora confirma — por escrito
+            </h2>
+            <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-start lg:gap-16">
+              {/* Print — mesmo tamanho do print de apoio (S7) */}
+              <div className="w-full shrink-0 sm:w-1/2 md:w-1/3">
+                <div className="overflow-hidden border border-canvas-accent/30">
+                  <img
+                    src="/cases/moods/print-beatriz.png"
+                    alt="Mensagem espontânea da Beatriz confirmando 95% de melhoria no suporte"
+                    className="h-auto w-full"
+                  />
+                </div>
+                <p className="mt-3 text-xs font-light text-neutral-500">
+                  Mensagem enviada pela Beatriz espontaneamente — sem solicitação, após a implementação
                 </p>
-                <footer className="mt-6">
-                  <p className="text-sm font-semibold text-neutral-400">Beatriz</p>
-                  <p className="mt-1 text-xs uppercase tracking-widest text-neutral-600">
-                    Fundadora · Moods
+              </div>
+              {/* Quote */}
+              <div className="lg:pt-4">
+                <blockquote className="border-l-2 border-canvas-accent pl-8">
+                  <p className="text-3xl font-light leading-relaxed text-white">
+                    &ldquo;Com a automação melhorou 95%.&rdquo;
                   </p>
-                </footer>
-              </blockquote>
+                  <footer className="mt-6">
+                    <p className="text-sm font-semibold text-neutral-400">Beatriz</p>
+                    <p className="mt-1 text-xs uppercase tracking-widest text-neutral-600">
+                      Fundadora · Moods
+                    </p>
+                  </footer>
+                </blockquote>
+                <p className="mt-8 text-sm font-light leading-relaxed text-neutral-500">
+                  Essa mensagem chegou sem que a gente pedisse. Resultado real, confirmado por quem
+                  viveu a mudança no dia a dia.
+                </p>
+              </div>
             </div>
           </Container>
         </section>

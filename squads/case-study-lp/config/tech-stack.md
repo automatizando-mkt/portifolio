@@ -17,11 +17,49 @@
 
 O squad produz conteúdo agnóstico de plataforma. A página final pode ser implementada em:
 
-- **Next.js (MDX)** — Padrão do projeto Automatizando (via `@dev`)
+- **Next.js — Canvas DS** ⭐ Padrão automatizando.site (via `@ux-design-expert`)
 - **Webflow** — Para entrega direta a clientes
 - **WordPress** — Via Elementor ou editor clássico
 - **Notion** — Para rascunho e aprovação do cliente
 - **Google Docs** — Para colaboração e revisão
+
+---
+
+## Canvas DS — Stack de Implementação (automatizando.site)
+
+> Padrão estabelecido no case Moods (11/2025). Seguir rigorosamente para todos os cases do site.
+
+| Item | Detalhe |
+|------|---------|
+| Projeto | `c:\AIOS\portfolio\` |
+| Framework | Next.js 16.1.6 · App Router · `output: 'export'` |
+| Estilo | Tailwind CSS 4 + tokens Canvas DS |
+| Rota | `app/cases/{slug}/page.tsx` |
+| Imagens | `public/cases/{slug}/` |
+| Task de implementação | `tasks/case-implementation.md` |
+| Padrão visual completo | `portfolio/docs/patterns/case-page.md` |
+
+### Componentes Canvas DS usados em cases
+
+| Componente | Caminho |
+|-----------|---------|
+| Container | `@/components/layout/Container` |
+| Card | `@/components/ui/Card` |
+| Button | `@/components/ui/Button` |
+| Badge | `@/components/ui/Badge` |
+| MetricCard | `@/components/ui/MetricCard` |
+| SectionHeading | `@/components/ui/SectionHeading` |
+| CTA | `@/components/sections/CTA` |
+| FadeSlideIn | `@/components/effects/FadeSlideIn` |
+
+### Convenções de implementação
+
+- Dados sempre em arrays no topo do arquivo (`TAGS`, `PILARES`, `ENTREGAVEIS`, `RESULTADOS`, `TAKEAWAYS`, `FAQS`)
+- Imagens com `<img>` nativo (não `next/image`)
+- FAQ com `<details>/<summary>` nativo (sem JS)
+- JSON-LD FAQPage obrigatório ao final
+- CTA mínimo 3x: hero (S1), resultados (S7), CTA section (S10)
+- Todos os CTAs → `/contato`
 
 ## Convenções de Arquivo
 

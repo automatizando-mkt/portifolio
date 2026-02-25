@@ -189,9 +189,11 @@ Cada seção usa `<FadeSlideIn>` como wrapper externo. Seções após a primeira
 <SectionHeading label="Metodologia" title="Sistema {Nome} em 4 Pilares" />
 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
   {PILARES.map((pilar) => (
-    <Card key={pilar.number}>
+    <Card key={pilar.number} className="border-white/20 hover:border-canvas-accent/50">
       <p className="mb-4 text-5xl font-light text-canvas-accent/20">{pilar.number}</p>
-      <h3 className="text-xl font-medium text-white ...">{pilar.title}</h3>
+      <h3 className="text-xl font-medium text-white transition-colors duration-300 group-hover:text-canvas-accent">
+        {pilar.title}
+      </h3>
       <p className="mt-3 font-light leading-relaxed text-neutral-400">{pilar.description}</p>
       {pilar.image && (
         <div className="mt-6 overflow-hidden border border-white/10 w-1/2 mx-auto">
@@ -203,7 +205,10 @@ Cada seção usa `<FadeSlideIn>` como wrapper externo. Seções após a primeira
 </div>
 ```
 
-**Regras imagens de pilar:** `w-1/2 mx-auto` para não dominar o Card.
+**Regras:**
+- Cards de pilares usam `className="border-white/20 hover:border-canvas-accent/50"` — borda mais visível que o padrão (`/10`) para dar destaque à grade.
+- `group-hover:text-canvas-accent` no h3 funciona porque o `Card` sempre inclui a classe `group` internamente.
+- Imagem do pilar: `w-1/2 mx-auto` para não dominar o Card.
 
 ---
 
@@ -249,9 +254,15 @@ Cada seção usa `<FadeSlideIn>` como wrapper externo. Seções após a primeira
 {/* Tabela antes/depois */}
 {/* Coluna "Antes" usa line-through; coluna "Depois" usa text-canvas-accent */}
 
-{/* Prints — grid 4 colunas no desktop */}
-<div className="mb-12 grid grid-cols-2 gap-6 md:grid-cols-4">
-  {/* Imagens com borda + legenda */}
+{/* Print de apoio — 1 print centralizado mostrando o sistema em funcionamento */}
+<div className="mb-12">
+  <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-neutral-500">
+    O sistema em ação
+  </p>
+  <div className="mx-auto w-full overflow-hidden border border-white/10 sm:w-1/2 md:w-1/3">
+    <img src="/cases/{slug}/{print-sistema}.jpeg" alt="..." className="h-auto w-full" />
+    <p className="border-t border-white/10 p-4 text-xs font-light text-neutral-500">Legenda descritiva</p>
+  </div>
 </div>
 
 {/* CTA inline */}
@@ -260,23 +271,60 @@ Cada seção usa `<FadeSlideIn>` como wrapper externo. Seções após a primeira
 </div>
 ```
 
-**Regras:** CTA obrigatório nesta seção. Grid de prints: `grid-cols-4` no desktop (imagens menores, mais discretas).
+**Regras:**
+- CTA obrigatório nesta seção.
+- Print de apoio: 1 imagem mostrando o sistema/IA em funcionamento (não o depoimento do cliente — esse vai para S8).
+- Tamanho: `sm:w-1/2 md:w-1/3` centralizado. Mesmo tamanho do print na S8.
+- Label obrigatória acima: `"O sistema em ação"` (ou variação descritiva).
 
 ---
 
-### S8 — Depoimento
+### S8 — Prova Real (Depoimento + Print)
+
+A seção de depoimento é a prova social mais importante do case. Não pode ser uma citação solta — precisa ter o print como evidência visual lado a lado com a quote.
 
 ```tsx
-<blockquote className="border-l-2 border-canvas-accent pl-8">
-  <p className="text-3xl font-light leading-relaxed text-white">&ldquo;{Quote}&rdquo;</p>
-  <footer className="mt-6">
-    <p className="text-sm font-semibold text-neutral-400">{Nome}</p>
-    <p className="mt-1 text-xs uppercase tracking-widest text-neutral-600">{Cargo · Empresa}</p>
-  </footer>
-</blockquote>
+<Container>
+  <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-canvas-accent">
+    Prova Real
+  </p>
+  <h2 className="mb-12 text-3xl font-medium text-white">
+    {Título — ex.: "A fundadora confirma — por escrito"}
+  </h2>
+  <div className="flex flex-col items-start gap-12 lg:flex-row lg:items-start lg:gap-16">
+    {/* Print do cliente — mesmo tamanho do print de apoio (S7) */}
+    <div className="w-full shrink-0 sm:w-1/2 md:w-1/3">
+      <div className="overflow-hidden border border-canvas-accent/30">
+        <img src="/cases/{slug}/{print-cliente}.png" alt="..." className="h-auto w-full" />
+      </div>
+      <p className="mt-3 text-xs font-light text-neutral-500">
+        Contexto do print — ex.: "Mensagem enviada espontaneamente, sem solicitação"
+      </p>
+    </div>
+    {/* Quote */}
+    <div className="lg:pt-4">
+      <blockquote className="border-l-2 border-canvas-accent pl-8">
+        <p className="text-3xl font-light leading-relaxed text-white">&ldquo;{Quote}&rdquo;</p>
+        <footer className="mt-6">
+          <p className="text-sm font-semibold text-neutral-400">{Nome}</p>
+          <p className="mt-1 text-xs uppercase tracking-widest text-neutral-600">{Cargo · Empresa}</p>
+        </footer>
+      </blockquote>
+      <p className="mt-8 text-sm font-light leading-relaxed text-neutral-500">
+        {Frase contextualizando a prova — ex.: "Resultado real, confirmado por quem viveu a mudança."}
+      </p>
+    </div>
+  </div>
+</Container>
 ```
 
-**Regras:** Se não há depoimento formal, usar mini-quote de conversa ou troca de mensagens. Documentar no `proof-checklist.md`.
+**Regras:**
+- Print do cliente usa `border-canvas-accent/30` (laranja) — diferencia do print de apoio (S7) que usa `border-white/10`.
+- Tamanho do print: `w-full shrink-0 sm:w-1/2 md:w-1/3` — igual ao print de apoio em S7.
+- Layout: `flex-col` mobile, `flex-row` desktop (print esquerda, quote direita).
+- Caption do print: explicar contexto (espontâneo/solicitado, quando, etc.).
+- Texto abaixo da quote: contextualizar a prova para o lead.
+- Se não houver print: usar só blockquote com `SectionHeading label="Depoimento"` acima.
 
 ---
 
@@ -371,11 +419,15 @@ Sempre incluir ao final do componente, dentro do fragment `<>`:
 
 ## Convenções de Imagem
 
-| Tipo | Path | Tamanho visual |
-|------|------|----------------|
-| Imagens de pilares | `public/cases/{slug}/{nome-kebab}.jpeg` | `w-1/2 mx-auto` dentro do Card |
-| Prints de resultados | `public/cases/{slug}/{nome-kebab}.png` | `grid-cols-4` no desktop |
-| Nomes | kebab-case descritivo | `boas-vindas-automaticas.jpeg`, `print-cliente.png` |
+| Tipo | Path | Tamanho visual | Borda |
+|------|------|----------------|-------|
+| Imagens de pilares | `public/cases/{slug}/{nome-kebab}.jpeg` | `w-1/2 mx-auto` dentro do Card | `border-white/10` |
+| Print de apoio (S7) | `public/cases/{slug}/{nome-kebab}.jpeg` | `mx-auto sm:w-1/2 md:w-1/3` | `border-white/10` |
+| Print do cliente (S8) | `public/cases/{slug}/{print-cliente}.png` | `w-full shrink-0 sm:w-1/2 md:w-1/3` | `border-canvas-accent/30` (laranja) |
+| Nomes | kebab-case descritivo | — | `boas-vindas-automaticas.jpeg`, `print-beatriz.png` |
+
+> **Tamanho padrão de prints:** `sm:w-1/2 md:w-1/3` em ambas as seções — mantém consistência visual.
+> **Diferenciador:** Print do cliente (S8) tem borda laranja para destacar a prova social.
 
 **Usar `<img>` nativo** (não `next/image`) — compatível com static export sem configuração adicional.
 

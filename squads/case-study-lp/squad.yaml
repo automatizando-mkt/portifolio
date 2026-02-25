@@ -23,6 +23,7 @@ components:
     - seo-faq-creation.md
     - case-editing.md
     - variants-ab.md
+    - case-implementation.md
   agents:
     - discovery.md
     - strategist.md
@@ -66,8 +67,10 @@ integrations:
       role: Revisão técnica adicional além do Editor interno
       handoff: "case-final.md → @qa valida qualidade antes de publicar"
     - id: ux-design-expert
-      role: Design visual da página (layout, tipografia, imagens)
-      handoff: "wireframe.md → @ux-design-expert cria o design visual"
+      role: Implementação da página de case no projeto automatizando.site (Canvas DS)
+      handoff: "case-final.md + brief.json → @ux-design-expert executa task case-implementation.md → app/cases/{slug}/page.tsx"
+      task: case-implementation.md
+      pattern: portfolio/docs/patterns/case-page.md
     - id: devops
       role: Deploy e publicação da página em produção
       handoff: "Página implementada → @devops faz o deploy"
