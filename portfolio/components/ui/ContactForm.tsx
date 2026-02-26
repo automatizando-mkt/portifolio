@@ -27,6 +27,7 @@ export function ContactForm() {
     const payload = {
       fullName: data.get('name') as string,
       email: data.get('email') as string,
+      phone: data.get('phone') as string,
       company: data.get('company') as string,
       projectDescription: data.get('message') as string,
       origem: 'Página de Contato',
@@ -85,6 +86,20 @@ export function ContactForm() {
           type="email"
           required
           placeholder="seu@email.com"
+          className={inputClasses}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="phone" className={labelClasses}>
+          Telefone / WhatsApp *
+        </label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          placeholder="(00) 00000-0000"
           className={inputClasses}
         />
       </div>

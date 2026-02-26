@@ -482,7 +482,7 @@ export default function MoodsCasePage() {
                   />
                 </div>
                 <p className="mt-3 text-xs font-light text-neutral-500">
-                  Mensagem enviada pela Beatriz espontaneamente — sem solicitação, após a implementação
+                  Resposta da Beatriz quando pedimos feedback para documentar o case
                 </p>
               </div>
               {/* Quote */}
@@ -499,8 +499,8 @@ export default function MoodsCasePage() {
                   </footer>
                 </blockquote>
                 <p className="mt-8 text-sm font-light leading-relaxed text-neutral-500">
-                  Essa mensagem chegou sem que a gente pedisse. Resultado real, confirmado por quem
-                  viveu a mudança no dia a dia.
+                  Quando pedimos um feedback para documentar o resultado, a Beatriz foi direta. Número
+                  real, confirmado por quem viveu a mudança no dia a dia.
                 </p>
               </div>
             </div>
