@@ -12,6 +12,14 @@ export const metadata: Metadata = {
 
 const CASES = [
   {
+    slug: 'mini-mercado-junior',
+    label: 'Crediário · Integração · IA',
+    title: 'De 50 a +500 clientes no crediário com 100% de automação',
+    description:
+      'Como o Mini Mercado Júnior usou o "Juninho" — uma IA conectada aos servidores locais — para automatizar a verificação de saldo e destravar o atendimento.',
+    metric: { value: '10X', label: 'Crescimento de conveniados' },
+  },
+  {
     slug: 'moods',
     label: 'Infoprodutor · WhatsApp · IA',
     title: '95% do suporte da Moods virou automático',
