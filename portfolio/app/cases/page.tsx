@@ -16,7 +16,7 @@ const CASES = [
     label: 'Crediário · Integração · IA',
     title: 'De 50 a +500 clientes no crediário com 100% de automação',
     description:
-      'Como o Mini Mercado Júnior usou o "Juninho" — uma IA conectada aos servidores locais — para automatizar a verificação de saldo e destravar o atendimento.',
+      'Como o Minimercado Junior usou o "Juninho" — uma IA conectada aos servidores locais — para automatizar a verificação de saldo e destravar o atendimento.',
     metric: { value: '10X', label: 'Crescimento de conveniados' },
   },
   {

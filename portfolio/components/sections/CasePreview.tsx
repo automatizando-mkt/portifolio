@@ -12,6 +12,13 @@ const FEATURED_CASES = [
     metric: { value: '95%', label: 'Atendimento automatizado' },
     tags: ['Infoprodutor', 'WhatsApp', 'IA'],
   },
+  {
+    slug: 'mini-mercado-junior',
+    title: 'De 50 a +500 clientes no crediário com 100% de automação',
+    description: 'Como o Minimercado Junior usou o "Juninho" — uma IA conectada aos servidores locais — para automatizar a verificação de saldo e destravar o atendimento.',
+    metric: { value: '10X', label: 'Crescimento de conveniados' },
+    tags: ['Crediário', 'Integração', 'IA'],
+  },
 ] as const;
 
 export function CasePreview() {

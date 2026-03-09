@@ -110,6 +110,7 @@ Verificar:
 ```
 
 **`components/sections/CasePreview.tsx`** — adicionar em `FEATURED_CASES`:
+> ⚠️ **CRÍTICO:** Nunca esqueça de adicionar o novo case à página inicial para garantir visibilidade.
 ```ts
 {
   slug: '{slug}',

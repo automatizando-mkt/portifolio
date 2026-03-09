@@ -40,6 +40,7 @@ Checklist usado pelo Editor (Agent G) e opcionalmente pelo @qa AIOS antes de apr
 - [ ] **Promessa sustentada:** A promessa do H1 é comprovada na seção de resultados?
 - [ ] **CTA 3x:** CTA aparece no mínimo em S1, S7 e S10?
 - [ ] **Oferta alinhada:** O CTA direciona para o serviço/pacote definido no brief?
+- [ ] **Visibilidade na Home:** O case foi adicionado à seção CasePreview da página inicial?
 
 ---
 
